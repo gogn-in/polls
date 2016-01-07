@@ -1,0 +1,196 @@
+{
+  "name": "is-polls-althingi",
+  "title": "Support for political parties in polls in Iceland",
+  "license": "cc-by 3.0",
+
+  "description": "",
+
+  "version": "1.0.0",
+  "sources": [],
+  "author": "@gogn.in",
+  "keywords": "election polling survey parliament iceland",
+
+  "countryCode": "is",
+  "language": "is",
+
+  "profiles": {
+    "dimensional": "*",
+    "tabular": "*"
+  },
+
+  "granularity": "aggregated",
+  "time_granularity": "date",
+
+  "resources": [
+
+    {
+      "path": "data.csv",
+      "format": "csv",
+      "mediatype": "text/csv",
+      "schema": {
+        "fields": [{
+          "name": "poll",
+          "type": "string"
+        }, {
+          "name": "party",
+          "type": "string"
+        }, {
+          "name": "support",
+          "type": "number",
+          "title": "Support (%)"
+        }],
+        "foreignKeys": [{
+          "fields": "poll",
+          "reference": {
+            "resource": "polls.csv",
+            "fields": "poll_id"
+          }
+        }, {
+          "fields": "party",
+          "reference": {
+            "resource": "parties.csv",
+            "fields": "party_id"
+          }
+        }]
+      }
+    },
+
+    {
+      "path": "polls.csv",
+      "format": "csv",
+      "mediatype": "text/csv",
+      "schema": {
+        "fields": [{
+          "name": "poll_id",
+          "type": "string"
+        }, {
+          "name": "poller",
+          "type": "string"
+        }, {
+          "name": "publish_date",
+          "type": "date",
+          "title": "Publish date",
+          "format": "fmt:%Y-%m-%d"
+        }, {
+          "name": "sample_size",
+          "type": "number",
+          "title": "Sample size"
+        }, {
+          "name": "response_rate",
+          "type": "number",
+          "title": "Response rate"
+        }],
+        "foreignKeys": [{
+          "fields": "poller",
+          "reference": {
+            "resource": "pollers.csv",
+            "fields": "poller_id"
+          }
+        }]
+      }
+    },
+
+    {
+      "path": "pollers.csv",
+      "format": "csv",
+      "mediatype": "text/csv",
+      "schema": {
+        "fields": [{
+          "name": "poller_id",
+          "type": "string"
+        }, {
+          "name": "poller_title",
+          "title": "Poller",
+          "type": "string"
+        }]
+      }
+    },
+
+    {
+      "path": "parties.csv",
+      "format": "csv",
+      "mediatype": "text/csv",
+      "schema": {
+        "fields": [{
+          "name": "party_id",
+          "type": "string"
+        }, {
+          "name": "party_title",
+          "title": "Political party",
+          "type": "string"
+        }]
+      }
+    }
+
+  ],
+
+  "mapping": {
+
+    "measures": {
+      "support": {
+        "resource": "data",
+        "source": "support",
+        "unit": "percent",
+        "factor": 1
+      },
+      "sample_size": {
+        "resource": "polls",
+        "source": "sample_size",
+        "unit": "population",
+        "factor": 1
+      },
+      "response_rate": {
+        "resource": "polls",
+        "source": "response_rate",
+        "unit": "population",
+        "factor": 1
+      }
+    },
+
+    "dimensions": {
+
+      "party": {
+        "dimensionType": "entity",
+        "attributes": {
+          "id": {
+            "resource": "parties",
+            "source": "party_id"
+          },
+          "title": {
+            "resource": "parties",
+            "source": "party_title"
+          }
+        },
+        "primaryKey": "id"
+      },
+
+      "poller": {
+        "dimensionType": "entity",
+        "attributes": {
+          "id": {
+            "resource": "pollers",
+            "source": "poller_id"
+          },
+          "title": {
+            "resource": "pollers",
+            "source": "poller_title"
+          }
+        },
+        "primaryKey": "id"
+      },
+
+      "date": {
+        "dimensionType": "datetime",
+        "attributes": {
+          "date": {
+            "resource": "polls",
+            "source": "publish_date"
+          }
+        },
+        "primaryKey": "date"
+      }
+
+    }
+  }
+
+}
