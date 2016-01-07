@@ -84,7 +84,7 @@
           "fields": "poller",
           "reference": {
             "resource": "pollers.csv",
-            "fields": "poller_id"
+            "fields": "pollster_id"
           }
         }]
       }
@@ -96,10 +96,10 @@
       "mediatype": "text/csv",
       "schema": {
         "fields": [{
-          "name": "poller_id",
+          "name": "pollster_id",
           "type": "string"
         }, {
-          "name": "poller_title",
+          "name": "pollster_title",
           "title": "Poller",
           "type": "string"
         }]
