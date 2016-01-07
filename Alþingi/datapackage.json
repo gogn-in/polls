@@ -8,7 +8,7 @@
   "version": "1.0.0",
   "sources": [],
   "author": "@gogn.in",
-  "keywords": "election polling survey parliament iceland",
+  "keywords": [ "election", "polling", "survey", "parliament", "iceland" ],
 
   "countryCode": "is",
   "language": "is",
