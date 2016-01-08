@@ -25,7 +25,7 @@
   "resources": [
 
     {
-      "path": "data.csv",
+      "path": "data/data.csv",
       "format": "csv",
       "mediatype": "text/csv",
       "schema": {
@@ -57,7 +57,7 @@
     },
 
     {
-      "path": "polls.csv",
+      "path": "data/polls.csv",
       "format": "csv",
       "mediatype": "text/csv",
       "schema": {
@@ -92,7 +92,7 @@
     },
 
     {
-      "path": "pollers.csv",
+      "path": "data/pollers.csv",
       "format": "csv",
       "mediatype": "text/csv",
       "schema": {
@@ -108,7 +108,7 @@
     },
 
     {
-      "path": "parties.csv",
+      "path": "data/parties.csv",
       "format": "csv",
       "mediatype": "text/csv",
       "schema": {
