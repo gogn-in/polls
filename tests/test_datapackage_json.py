@@ -18,12 +18,14 @@ class TestValidDatapackage(unittest.TestCase):
                     yield (root, filename)
 
     def test_datapackage_json_validates(self):
+        """datapackage.json: Test that datapackage.json validates"""
         for root, filename in self.find_datapackage_files():
             with open(os.path.join(root, filename)) as f:
                 datapackagejson = json.load(f)
                 datapackage_validate.validate(datapackagejson)
 
     def test_datapackage_has_data_files(self):
+        """datapackage.json: Test that data files are present where referenced"""
         for root, filename in self.find_datapackage_files():
             with open(os.path.join(root, filename)) as f:
                 datapackagejson = json.load(f)
