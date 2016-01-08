@@ -4,7 +4,7 @@ Script to scrape polling data from Markaðs og miðlarannsóknir (MMR) and outpu
 it as CSV to stdout.
 
 There's a `chart on MMR's website`_ that uses `a Google spreadsheet`_ that
-includes data for every poll MMR have completed since October 2010. The
+includes data for every poll MMR have completed since October 2008. The
 spreadsheet is in a wide (aka unpivoted) format. It's downloaded as a CSV,
 converted to long-form `tidy data`_, and output to stdout.
 
