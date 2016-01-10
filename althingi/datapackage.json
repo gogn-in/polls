@@ -30,24 +30,24 @@
       "mediatype": "text/csv",
       "schema": {
         "fields": [{
-          "name": "poll",
-          "type": "string"
+          "name": "poll_id",
+          "type": "integer"
         }, {
-          "name": "party",
-          "type": "string"
+          "name": "party_id",
+          "type": "integer"
         }, {
           "name": "support",
           "type": "number",
           "title": "Support (%)"
         }],
         "foreignKeys": [{
-          "fields": "poll",
+          "fields": "poll_id",
           "reference": {
             "resource": "polls.csv",
             "fields": "poll_id"
           }
         }, {
-          "fields": "party",
+          "fields": "party_id",
           "reference": {
             "resource": "parties.csv",
             "fields": "party_id"
@@ -63,10 +63,10 @@
       "schema": {
         "fields": [{
           "name": "poll_id",
-          "type": "string"
+          "type": "integer"
         }, {
-          "name": "poller",
-          "type": "string"
+          "name": "pollster_id",
+          "type": "integer"
         }, {
           "name": "publish_date",
           "type": "date",
@@ -82,9 +82,9 @@
           "title": "Response rate"
         }],
         "foreignKeys": [{
-          "fields": "poller",
+          "fields": "pollster_id",
           "reference": {
-            "resource": "pollers.csv",
+            "resource": "pollsters.csv",
             "fields": "pollster_id"
           }
         }]
@@ -92,15 +92,15 @@
     },
 
     {
-      "path": "data/pollers.csv",
+      "path": "data/pollsters.csv",
       "format": "csv",
       "mediatype": "text/csv",
       "schema": {
         "fields": [{
           "name": "pollster_id",
-          "type": "string"
+          "type": "integer"
         }, {
-          "name": "pollster_title",
+          "name": "name",
           "title": "Poller",
           "type": "string"
         }]
@@ -114,9 +114,9 @@
       "schema": {
         "fields": [{
           "name": "party_id",
-          "type": "string"
+          "type": "integer"
         }, {
-          "name": "party_title",
+          "name": "name",
           "title": "Political party",
           "type": "string"
         }]
@@ -159,22 +159,22 @@
           },
           "title": {
             "resource": "parties",
-            "source": "party_title"
+            "source": "name"
           }
         },
         "primaryKey": "id"
       },
 
-      "poller": {
+      "pollster": {
         "dimensionType": "entity",
         "attributes": {
           "id": {
-            "resource": "pollers",
-            "source": "poller_id"
+            "resource": "pollsters",
+            "source": "pollster_id"
           },
           "title": {
-            "resource": "pollers",
-            "source": "poller_title"
+            "resource": "pollsters",
+            "source": "name"
           }
         },
         "primaryKey": "id"
