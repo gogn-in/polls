@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Script to collect polling data from Gallup (né Capacent) and output it as CSV
-to stdout.
+to a file-like object (stdout by default).
 
 Gallup store their polling data in a `dataset on DataMarket`_. Using the
 `DataMarket API`_ we can download a CSV containing every poll since March 1994.
@@ -24,13 +24,21 @@ SOURCE_URL = "https://datamarket.com/api/v1/list.csv?ds=yf5&callback="
 PARTY_NAME_RE = re.compile(r"\(\w\) (.+)|(Hreyfingin)")
 
 
-def scrape():
+def scrape(file_obj=None, include_header=True):
     """
     Download the source data as a CSV using DataMarket's API, clean it up and
-    discard uninteresting rows, and output it to stdout.
+    discard uninteresting rows, and output it to a file-like object (stdout by
+    default).
+
+    Args:
+        file_obj: file-like object in which to output the parsed CSV data
+        include_header: if True (default), include a header row in the output
     """
-    output = csv.writer(sys.stdout)
-    output.writerow(("date", "pollster", "party", "support"))
+    if file_obj is None:
+        file_obj = sys.stdout
+    output = csv.writer(file_obj)
+    if include_header:
+        output.writerow(("date", "pollster", "party", "support"))
 
     response = urllib.request.urlopen(SOURCE_URL)
     # Since urllib returns bytes, iterate through the CSV data and decode it as

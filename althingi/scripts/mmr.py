@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
 """
 Script to scrape polling data from Markaðs og miðlarannsóknir (MMR) and output
-it as CSV to stdout.
+it as CSV to a file-like object (stdout by default)..
 
 There's a `chart on MMR's website`_ that uses `a Google spreadsheet`_ that
 includes data for every poll MMR have completed since October 2008. The
 spreadsheet is in a wide (aka unpivoted) format. It's downloaded as a CSV,
-converted to long-form `tidy data`_, and output to stdout.
+converted to long-form `tidy data`_, and output to a file-like object (stdout
+by default).
 
 The script is written in Python 3 and has no dependencies.
 
@@ -25,13 +26,21 @@ SPREADSHEET_ID = "1T2t4HRHzTbFWp89fs-bUjOgk7X1FVt_zIThftmxy-IY"
 EXPORT_URL = "https://docs.google.com/spreadsheets/d/{}/export?format=csv"
 
 
-def scrape():
+def scrape(file_obj=None, include_header=True):
     """
     Download the source CSV data from Google Spreadsheets, convert it from
-    wide-form to long-form, and output it to stdout.
+    wide-form to long-form, and output it to a file-like object (stdout by
+    default).
+
+    Args:
+        file_obj: file-like object in which to output the parsed CSV data
+        include_header: if True (default), include a header row in the output
     """
-    output = csv.writer(sys.stdout)
-    output.writerow(("date", "pollster", "party", "support"))
+    if file_obj is None:
+        file_obj = sys.stdout
+    output = csv.writer(file_obj)
+    if include_header:
+        output.writerow(("date", "pollster", "party", "support"))
 
     response = urllib.request.urlopen(EXPORT_URL.format(SPREADSHEET_ID))
     # Since urllib returns bytes, iterate through the CSV data and decode it as

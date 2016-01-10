@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Script to scrape polling data (from January 2012 to April 2013) from
-Morgunblaðið and output it as CSV to stdout.
+Morgunblaðið and output it as CSV to a file-like object (stdout by default).
 
 From `a Morgunblaðið article`_ you can find a `CSV archive of all polls`_
 produced between January 2012 and April 2013. If we discard those that are
@@ -25,13 +25,20 @@ SOURCE_URL = "http://www.mbl.is/frettir/kosningar/kannanir.csv"
 POLLSTERS = ("Fréttablaðið / Stöð 2", "Félagsvísindast. f. Morgunblaðið")
 
 
-def scrape():
+def scrape(file_obj=None, include_header=True):
     """
     Download the source CSV data from Morgunblaðið, discard rows we get from
-    elsewhere, and output the rest to stdout.
+    elsewhere, and output the rest to a file-like object (stdout by default).
+
+    Args:
+        file_obj: file-like object in which to output the parsed CSV data
+        include_header: if True (default), include a header row in the output
     """
-    output = csv.writer(sys.stdout)
-    output.writerow(("date", "pollster", "party", "support"))
+    if file_obj is None:
+        file_obj = sys.stdout
+    output = csv.writer(file_obj)
+    if include_header:
+        output.writerow(("date", "pollster", "party", "support"))
 
     response = urllib.request.urlopen(SOURCE_URL)
     # Since urllib returns bytes, iterate through the CSV data and decode it as
