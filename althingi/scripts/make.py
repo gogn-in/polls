@@ -35,13 +35,13 @@ def scrape(file_obj=None, include_header=True):
 
     Args:
         file_obj: file-like object in which to output the scrapers' data
-        include_header: if True (default), include header rows in the output
+        include_header: if True (default), include a header row in the output
     """
     if file_obj is None:
         file_obj = sys.stdout
-    for scraper_name in SCRAPERS:
+    for i, scraper_name in enumerate(SCRAPERS):
         scraper = importlib.import_module(scraper_name)
-        scraper.scrape(file_obj, include_header)
+        scraper.scrape(file_obj, include_header=include_header and i == 0)
 
 
 def save_csv_files():
