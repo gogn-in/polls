@@ -7,7 +7,16 @@
   "description": "",
 
   "version": "1.0.0",
-  "sources": [],
+  "sources": [{
+    "name": "Markaðs og miðlarannsóknir",
+    "web": "https://docs.google.com/spreadsheets/d/1T2t4HRHzTbFWp89fs-bUjOgk7X1FVt_zIThftmxy-IY/export?format=csv"
+  }, {
+    "name": "Gallup",
+    "web": "https://datamarket.com/data/set/yf5/"
+  }, {
+    "name": "Morgunblaðið",
+    "web": "http://www.mbl.is/frettir/kosningar/kannanir.csv"
+  }],
   "author": "@gogn.in",
   "keywords": [ "election", "polling", "survey", "parliament", "iceland" ],
 
