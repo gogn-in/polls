@@ -24,6 +24,8 @@
   "countryCode": "is",
   "language": "is",
 
+  "base": "data/",
+
   "profiles": {
     "dimensional": "*",
     "tabular": "*"
@@ -35,7 +37,7 @@
   "resources": [
 
     {
-      "path": "data/data.csv",
+      "path": "data.csv",
       "format": "csv",
       "mediatype": "text/csv",
       "schema": {
@@ -67,7 +69,7 @@
     },
 
     {
-      "path": "data/polls.csv",
+      "path": "polls.csv",
       "format": "csv",
       "mediatype": "text/csv",
       "schema": {
@@ -102,7 +104,7 @@
     },
 
     {
-      "path": "data/pollsters.csv",
+      "path": "pollsters.csv",
       "format": "csv",
       "mediatype": "text/csv",
       "schema": {
@@ -118,7 +120,7 @@
     },
 
     {
-      "path": "data/parties.csv",
+      "path": "parties.csv",
       "format": "csv",
       "mediatype": "text/csv",
       "schema": {
