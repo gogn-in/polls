@@ -17,6 +17,7 @@
     "name": "Morgunblaðið",
     "web": "http://www.mbl.is/frettir/kosningar/kannanir.csv"
   }],
+  "countryCode": "is",
   "author": "@gogn.in",
   "keywords": [ "election", "polling", "survey", "parliament", "iceland" ],
 
