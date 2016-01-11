@@ -29,10 +29,7 @@ class TestValidDatapackage(unittest.TestCase):
         for root, filename in self.find_datapackage_files():
             with open(os.path.join(root, filename)) as f:
                 datapackagejson = json.load(f)
-                base = datapackagejson["base"]
+                base = datapackagejson.get("base", "")
                 resources = datapackagejson["resources"]
                 for resource in resources:
                     assert(os.path.isfile(os.path.join(root, base, resource["path"])))
-
-
-
