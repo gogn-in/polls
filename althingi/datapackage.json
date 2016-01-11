@@ -38,6 +38,7 @@
 
     {
       "path": "data.csv",
+      "name": "data",
       "format": "csv",
       "mediatype": "text/csv",
       "schema": {
@@ -70,6 +71,7 @@
 
     {
       "path": "polls.csv",
+      "name": "polls",
       "format": "csv",
       "mediatype": "text/csv",
       "schema": {
@@ -105,6 +107,7 @@
 
     {
       "path": "pollsters.csv",
+      "name": "pollsters",
       "format": "csv",
       "mediatype": "text/csv",
       "schema": {
@@ -121,6 +124,7 @@
 
     {
       "path": "parties.csv",
+      "name": "parties",
       "format": "csv",
       "mediatype": "text/csv",
       "schema": {
