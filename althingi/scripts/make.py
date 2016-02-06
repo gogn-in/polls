@@ -10,6 +10,7 @@ will be updated.
 import csv
 import io
 import importlib
+import operator
 
 
 # Modules that scrape data from pollsters.
@@ -54,6 +55,11 @@ def save_csv_files():
     raw_data = io.StringIO()
     scrape(raw_data, include_header=False)
     raw_data.seek(0)
+    # Order the data first by date, then party, then pollster. That way the
+    # order of output will be stable over time, with new polls, parties, and
+    # pollsters being added to the bottom of the CSV output (and being given
+    # later ids) rather than being interpolated each run.
+    data = sorted(csv.reader(raw_data), key=operator.itemgetter(0, 2, 1))
 
     # Output that data in a set of third-normal form CSVs.
     parties = []
@@ -62,7 +68,7 @@ def save_csv_files():
     with open("../data/data.csv", "w") as fh:
         data_csv = csv.writer(fh)
         data_csv.writerow(("poll_id", "party_id", "support"))
-        for date, pollster, party, support in csv.reader(raw_data):
+        for date, pollster, party, support in data:
             # Keep a list of unique pollster names and use each pollster's
             # index in the list as a unique id.
             try:
