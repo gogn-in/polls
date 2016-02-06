@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 import datapackage_validate
 import json
 import os
